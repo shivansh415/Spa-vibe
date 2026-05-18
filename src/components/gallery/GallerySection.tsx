@@ -10,15 +10,15 @@ if (typeof window !== 'undefined') {
 }
 
 const IMAGES = [
-  { src: '/spavibe1.jpg',                        alt: 'Spa Vibe luxury experience',  label: 'Our Signature'  },
-  { src: '/spavibe2.jpg',                        alt: 'Premium spa treatment',       label: 'Pure Bliss'     },
-  { src: '/spavibe3.jpg',                        alt: 'Relaxing therapy session',    label: 'Deep Restore'   },
-  { src: '/spavibe4.jpg',                        alt: 'Tranquil spa moment',         label: 'Serenity'       },
-  { src: '/images/gallery/gallery-facial.jpg',   alt: 'Facial therapy treatment',   label: 'Glow Ritual'    },
-  { src: '/images/gallery/gallery-candles.jpg',  alt: 'Luxury spa candles',         label: 'Ambiance'       },
-  { src: '/images/gallery/gallery-interior.jpg', alt: 'Spa treatment room',         label: 'The Sanctuary'  },
-  { src: '/images/gallery/gallery-oils.jpg',     alt: 'Aromatherapy oils',          label: 'Essence'        },
-  { src: '/images/gallery/gallery-towels.jpg',   alt: 'Luxury spa towels',          label: 'Pure Comfort'   },
+  { src: '/spavibe1.jpg',                        alt: 'Premium body massage therapy at Spa Vibe in Indore',           label: 'Our Signature'  },
+  { src: '/spavibe2.jpg',                        alt: 'Luxury relaxing spa treatment at best spa in Indore',         label: 'Pure Bliss'     },
+  { src: '/spavibe3.jpg',                        alt: 'Deep tissue massage session at Spa Vibe wellness center',     label: 'Deep Restore'   },
+  { src: '/spavibe4.jpg',                        alt: 'Tranquil couple spa moment at Spa Vibe Indore',               label: 'Serenity'       },
+  { src: '/images/gallery/gallery-facial.jpg',   alt: 'Professional facial therapy treatment at luxury spa in Indore', label: 'Glow Ritual'    },
+  { src: '/images/gallery/gallery-candles.jpg',  alt: 'Aromatherapy candles at Spa Vibe premium spa Indore',          label: 'Ambiance'       },
+  { src: '/images/gallery/gallery-interior.jpg', alt: 'Elegant spa treatment room interior at Spa Vibe Indore',       label: 'The Sanctuary'  },
+  { src: '/images/gallery/gallery-oils.jpg',     alt: 'Essential aromatherapy oils at wellness spa in Indore',        label: 'Essence'        },
+  { src: '/images/gallery/gallery-towels.jpg',   alt: 'Luxury spa towels and amenities at Spa Vibe',                  label: 'Pure Comfort'   },
 ];
 
 const DESKTOP_HEIGHTS = [
@@ -184,7 +184,7 @@ export default function GallerySection() {
             fontWeight: 300, color: 'var(--color-warm-gray)',
             maxWidth: '520px', margin: '0 auto', lineHeight: 1.75, letterSpacing: '0.02em',
           }}>
-            Every moment at Spa Vibe is designed to restore peace, beauty, and balance.
+            Every moment at Spa Vibe is designed to restore peace, beauty, and balance — your premier luxury spa experience in Indore.
           </p>
         </div>
 

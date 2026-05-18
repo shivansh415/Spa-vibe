@@ -240,8 +240,8 @@ export default function CTASection() {
               opacity: 0,
             }}
           >
-            Step into a world of calm and renewal. Our expert therapists are ready to
-            craft your perfect escape — one breath, one touch, one moment at a time.
+            Step into Indore’s finest luxury spa experience. Our expert therapists are ready to
+            craft your perfect escape — from body massage to couple spa, one breath at a time.
           </p>
 
           {/* CTA Button */}

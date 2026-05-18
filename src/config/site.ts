@@ -13,9 +13,9 @@ export const siteConfig = {
 
   // ── SEO ──
   seo: {
-    title: 'SPA VIBE — Premium Spa & Wellness Experience in Indore',
+    title: 'Best Luxury Spa in Indore | Spa Vibe — Premium Massage & Wellness Center',
     description:
-      'Discover pure tranquility at SPA VIBE. Premium spa offering body massage, aromatherapy, facials, and holistic wellness treatments. Book your session today.',
+      'Spa Vibe is the best luxury spa in Indore offering premium body massage, couple spa, aromatherapy, facials & holistic wellness treatments. Book now!',
   },
 
   // ── Contact ──

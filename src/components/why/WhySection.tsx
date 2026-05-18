@@ -18,7 +18,7 @@ const LEFT_FEATURES = [
       </svg>
     ),
     title: 'Professional Team',
-    desc: 'Certified therapists trained in international wellness techniques to deliver exceptional care.',
+    desc: 'Certified massage therapists trained in international wellness techniques — delivering the best body massage experience in Indore.',
   },
   {
     icon: (
@@ -27,7 +27,7 @@ const LEFT_FEATURES = [
       </svg>
     ),
     title: 'Personalized Wellness',
-    desc: 'Bespoke therapy plans designed to match your unique body, mind, and wellness goals.',
+    desc: 'Bespoke spa therapy plans tailored to your unique body, mind, and wellness goals — from deep tissue to couple spa.',
   },
 ];
 
@@ -39,7 +39,7 @@ const RIGHT_FEATURES = [
       </svg>
     ),
     title: 'Premium Therapies',
-    desc: 'Curated collection of luxury treatments using the finest organic oils and natural ingredients.',
+    desc: 'Curated luxury spa treatments including aromatherapy, full body massage, and facials using the finest organic oils.',
   },
   {
     icon: (
@@ -48,7 +48,7 @@ const RIGHT_FEATURES = [
       </svg>
     ),
     title: 'Tranquil Environment',
-    desc: 'A sanctuary of calm — designed to transport you far from the noise of everyday life.',
+    desc: 'A premium wellness sanctuary in Indore — designed to transport you far from the noise of everyday life.',
   },
 ];
 
@@ -259,7 +259,7 @@ export default function WhySection() {
 
               <Image
                 src="/images/why/spa-therapy-center.png"
-                alt="Premium spa therapy at Spa Vibe"
+                alt="Premium spa therapy center at Spa Vibe, best luxury wellness spa in Indore"
                 fill
                 style={{ objectFit: 'cover', objectPosition: 'center', zIndex: 1 }}
                 sizes="(max-width: 768px) 220px, 400px"

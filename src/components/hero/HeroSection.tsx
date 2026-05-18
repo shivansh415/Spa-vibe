@@ -384,7 +384,7 @@ export default function HeroSection() {
                 opacity: 0,
               }}
             >
-              Experience premium therapies designed to calm your body,
+              Experience premium spa therapies in Indore — designed to calm your body,
               refresh your skin, and restore your peace.
             </p>
 
@@ -472,7 +472,7 @@ export default function HeroSection() {
                 >
                   <Image
                     src="/images/hero/hero-woman.webp"
-                    alt="Premium spa wellness experience"
+                    alt="Luxury spa wellness treatment at Spa Vibe, the best spa in Indore"
                     fill
                     priority
                     className="object-cover object-top"
@@ -502,7 +502,7 @@ export default function HeroSection() {
               <div ref={leaf1InnerRef} style={{ willChange: 'transform' }}>
                 <Image
                   src="/images/hero/leaf-monstera.webp"
-                  alt="" width={140} height={140}
+                  alt="Decorative monstera leaf element at Spa Vibe luxury spa" width={140} height={140}
                   className="pointer-events-none select-none"
                   priority={false}
                   style={{ width: 'auto' }}
@@ -519,7 +519,7 @@ export default function HeroSection() {
               <div ref={leaf2InnerRef} style={{ willChange: 'transform' }}>
                 <Image
                   src="/images/hero/leaf-eucalyptus.webp"
-                  alt="" width={100} height={120}
+                  alt="Eucalyptus leaf decoration at Spa Vibe wellness center" width={100} height={120}
                   className="pointer-events-none select-none"
                   priority={false}
                   style={{ width: 'auto' }}
@@ -536,7 +536,7 @@ export default function HeroSection() {
               <div ref={leaf3InnerRef} style={{ willChange: 'transform' }}>
                 <Image
                   src="/images/hero/leaf-monstera.webp"
-                  alt="" width={70} height={70}
+                  alt="Botanical accent leaf at Spa Vibe spa in Indore" width={70} height={70}
                   className="pointer-events-none select-none"
                   priority={false}
                   style={{ width: 'auto' }}

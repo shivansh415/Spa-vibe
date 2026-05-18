@@ -85,7 +85,7 @@ export default function Footer() {
               <div style={{ display: 'flex', alignItems: 'center', gap: '14px', marginBottom: '18px' }}>
                 <Image
                   src="/logo.png"
-                  alt="Spa Vibe Logo"
+                  alt="Spa Vibe logo — best luxury spa in Indore"
                   width={44}
                   height={58}
                   style={{ objectFit: 'contain', filter: 'brightness(1.1)', width: 'auto' }}
