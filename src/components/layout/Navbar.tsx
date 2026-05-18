@@ -297,7 +297,7 @@ export default function Navbar() {
         className="fixed top-0 left-0 right-0 z-[50] flex justify-center"
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ delay: 2.8, duration: 0.8, ease: ease.smooth }}
+        transition={{ delay: 1.2, duration: 0.8, ease: ease.smooth }}
       >
         <motion.nav
           className="relative flex items-center justify-between w-full mx-4 md:mx-6 lg:mx-8 transition-all duration-500"

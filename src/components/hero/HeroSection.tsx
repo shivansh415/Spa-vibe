@@ -2,9 +2,7 @@
 
 import { useRef, useEffect } from 'react';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
 import { siteConfig } from '@/config/site';
-import { ease } from '@/lib/motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -56,7 +54,7 @@ export default function HeroSection() {
       /* ─────────────────────────────────────
          1. ENTRANCE TIMELINE (after preloader ~3s)
          ───────────────────────────────────── */
-      const tl = gsap.timeline({ delay: 3.0 });
+      const tl = gsap.timeline({ delay: 1.3 });
 
       // Glow circle entrance
       tl.fromTo(
@@ -72,11 +70,11 @@ export default function HeroSection() {
         0.15
       )
 
-      // Image — subtle scale reveal
+      // Image — subtle scale enhancement (starts visible for LCP)
       .fromTo(
         imageWrapRef.current,
-        { opacity: 0, scale: 1.06, y: 24 },
-        { opacity: 1, scale: 1, y: 0, duration: 1.3, ease: 'power3.out' },
+        { scale: 1.04, y: 16 },
+        { scale: 1, y: 0, duration: 1.3, ease: 'power3.out' },
         0.1
       )
 
@@ -395,12 +393,12 @@ export default function HeroSection() {
               className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 mt-8 lg:mt-10"
               style={{ opacity: 0 }}
             >
-              {/* Primary */}
-              <motion.a
+              {/* Primary — CSS-only hover (no Framer Motion) */}
+              <a
                 href={`https://wa.me/${siteConfig.contact.whatsappNumber}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 rounded-full"
+                className="hero-cta-btn inline-flex items-center justify-center gap-2 rounded-full"
                 style={{
                   fontFamily: 'var(--font-body)',
                   fontWeight: 500,
@@ -410,22 +408,13 @@ export default function HeroSection() {
                   padding: '14px 32px',
                   backgroundColor: 'var(--color-charcoal)',
                   color: 'var(--color-linen)',
+                  textDecoration: 'none',
+                  transition: 'background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease',
                 }}
-                whileHover={{
-                  backgroundColor: '#3D2B1F',
-                  y: -2,
-                  boxShadow: '0 12px 32px rgba(43, 43, 43, 0.18)',
-                }}
-                whileTap={{ scale: 0.97 }}
-                transition={{ duration: 0.3, ease: ease.smooth }}
               >
                 Book Appointment
-              </motion.a>
-
-
+              </a>
             </div>
-
-
           </div>
 
           {/* ═══ RIGHT SIDE — Image Composition ═══ */}
@@ -462,7 +451,6 @@ export default function HeroSection() {
               style={{
                 width: 'clamp(280px, 50vw, 440px)',
                 height: 'clamp(340px, 60vw, 540px)',
-                opacity: 0,
               }}
             >
               {/* Inner div driven by the float tween */}
@@ -506,13 +494,10 @@ export default function HeroSection() {
               <div ref={leaf1InnerRef} style={{ willChange: 'transform' }}>
                 <Image
                   src="/images/hero/leaf-monstera.webp"
-                  alt="Decorative monstera leaf element at Spa Vibe luxury spa" width={140} height={140}
+                  alt="" width={140} height={140}
                   className="pointer-events-none select-none"
-                  priority={false}
-                  style={{
-                    width: 'auto',
-                    filter: 'saturate(1.2) drop-shadow(0 4px 12px rgba(94,116,101,0.18))',
-                  }}
+                  loading="lazy"
+                  style={{ width: 'auto' }}
                 />
               </div>
             </div>
@@ -528,13 +513,10 @@ export default function HeroSection() {
               <div ref={leaf2InnerRef} style={{ willChange: 'transform' }}>
                 <Image
                   src="/images/hero/leaf-eucalyptus.webp"
-                  alt="Eucalyptus leaf decoration at Spa Vibe wellness center" width={100} height={120}
+                  alt="" width={100} height={120}
                   className="pointer-events-none select-none"
-                  priority={false}
-                  style={{
-                    width: 'auto',
-                    filter: 'saturate(1.15) drop-shadow(0 3px 10px rgba(94,116,101,0.15))',
-                  }}
+                  loading="lazy"
+                  style={{ width: 'auto' }}
                 />
               </div>
             </div>
@@ -550,13 +532,10 @@ export default function HeroSection() {
               <div ref={leaf3InnerRef} style={{ willChange: 'transform' }}>
                 <Image
                   src="/images/hero/leaf-monstera.webp"
-                  alt="Botanical accent leaf at Spa Vibe spa in Indore" width={70} height={70}
+                  alt="" width={70} height={70}
                   className="pointer-events-none select-none"
-                  priority={false}
-                  style={{
-                    width: 'auto',
-                    filter: 'saturate(1.1) blur(0.5px) drop-shadow(0 2px 8px rgba(94,116,101,0.12))',
-                  }}
+                  loading="lazy"
+                  style={{ width: 'auto' }}
                 />
               </div>
             </div>

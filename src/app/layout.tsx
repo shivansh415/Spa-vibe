@@ -9,7 +9,7 @@ import { SmoothScrollProvider } from '@/lib/smooth-scroll';
    ────────────────────────────────────────────── */
 const cormorant = Cormorant_Garamond({
   subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700'],
+  weight: ['300', '400', '500'],
   style: ['normal', 'italic'],
   variable: '--font-cormorant',
   display: 'swap',
@@ -17,7 +17,7 @@ const cormorant = Cormorant_Garamond({
 
 const poppins = Poppins({
   subsets: ['latin'],
-  weight: ['300', '400', '500', '600'],
+  weight: ['300', '400', '500'],
   variable: '--font-poppins',
   display: 'swap',
 });
@@ -332,15 +332,6 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://api.mapbox.com" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-
-        {/* Preload hero image — LCP element needs browser-level priority */}
-        <link
-          rel="preload"
-          href="/images/hero/hero-man-spa.webp"
-          as="image"
-          type="image/webp"
-          fetchPriority="high"
-        />
 
         {/* JSON-LD Structured Data — rendered as raw script tags for crawlers */}
         <script

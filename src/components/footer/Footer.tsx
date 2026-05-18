@@ -1,4 +1,4 @@
-'use client';
+/* Server Component — no client JS needed */
 
 import Image from 'next/image';
 import { siteConfig } from '@/config/site';

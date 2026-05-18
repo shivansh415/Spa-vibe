@@ -1,23 +1,19 @@
 import ClientSections from '@/components/ClientSections';
+import Footer from '@/components/footer/Footer';
 import { siteConfig } from '@/config/site';
 
 /* ──────────────────────────────────────────────
    Homepage — Server Component
    
-   This is a SERVER component (no 'use client').
-   The SSR-visible content below provides semantic
-   HTML, heading hierarchy, and rich text that
-   Google crawlers can index. Interactive sections
-   load via the ClientSections wrapper (ssr: false).
+   SSR-visible content provides semantic HTML
+   for crawlers. Footer is a Server Component
+   (zero JS). Interactive sections load via
+   ClientSections.
    ────────────────────────────────────────────── */
 export default function Home() {
   return (
     <>
-      {/* ── SSR-visible SEO content for crawlers ──
-          Rendered server-side for Googlebot. Uses semantic
-          HTML with a proper heading hierarchy. Visually
-          hidden via sr-only so it doesn't conflict with
-          the interactive client-rendered design. */}
+      {/* ── SSR-visible SEO content for crawlers ── */}
       <div className="sr-only">
         <h1>Best Luxury Spa &amp; Body Massage in Indore — Spa Vibe</h1>
         <p>
@@ -73,6 +69,9 @@ export default function Home() {
 
       {/* ── Interactive client-side sections ── */}
       <ClientSections />
+
+      {/* ── Footer — Server Component (zero JS) ── */}
+      <Footer />
     </>
   );
 }
