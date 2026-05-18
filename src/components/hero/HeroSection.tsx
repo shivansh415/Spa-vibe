@@ -117,7 +117,7 @@ export default function HeroSection() {
         [leaf1Ref.current, leaf2Ref.current, leaf3Ref.current],
         { opacity: 0, scale: 0.75 },
         {
-          opacity: (i) => [0.6, 0.5, 0.3][i],
+          opacity: (i: number) => [0.72, 0.6, 0.42][i],
           scale: 1,
           duration: 0.9,
           ease: 'power2.out',
@@ -494,10 +494,11 @@ export default function HeroSection() {
 
             {/* ── Floating Leaves (GSAP-driven) ── */}
 
-            {/* Leaf 1 — outer: parallax | inner: float (separated to prevent flicker) */}
+            {/* Leaf 1 — Monstera top-right
+                Mobile: z-[5] = behind image | Desktop: md:z-20 = cinematic foreground depth */}
             <div
               ref={leaf1Ref}
-              className="absolute -top-4 -right-4 md:top-2 md:-right-8 lg:-right-12 z-20"
+              className="absolute -top-4 -right-4 md:top-2 md:-right-8 lg:-right-12 z-[5] md:z-20"
               style={{ opacity: 0, willChange: 'transform' }}
             >
               <div ref={leaf1InnerRef} style={{ willChange: 'transform' }}>
@@ -506,15 +507,19 @@ export default function HeroSection() {
                   alt="Decorative monstera leaf element at Spa Vibe luxury spa" width={140} height={140}
                   className="pointer-events-none select-none"
                   priority={false}
-                  style={{ width: 'auto' }}
+                  style={{
+                    width: 'auto',
+                    filter: 'saturate(1.2) drop-shadow(0 4px 12px rgba(94,116,101,0.18))',
+                  }}
                 />
               </div>
             </div>
 
-            {/* Leaf 2 — outer: parallax | inner: float */}
+            {/* Leaf 2 — Eucalyptus bottom-left
+                Mobile: z-[5] = behind image | Desktop: md:z-20 */}
             <div
               ref={leaf2Ref}
-              className="absolute -bottom-2 -left-6 md:-left-10 lg:-left-16 z-20"
+              className="absolute -bottom-2 -left-6 md:-left-10 lg:-left-16 z-[5] md:z-20"
               style={{ opacity: 0, willChange: 'transform' }}
             >
               <div ref={leaf2InnerRef} style={{ willChange: 'transform' }}>
@@ -523,15 +528,19 @@ export default function HeroSection() {
                   alt="Eucalyptus leaf decoration at Spa Vibe wellness center" width={100} height={120}
                   className="pointer-events-none select-none"
                   priority={false}
-                  style={{ width: 'auto' }}
+                  style={{
+                    width: 'auto',
+                    filter: 'saturate(1.15) drop-shadow(0 3px 10px rgba(94,116,101,0.15))',
+                  }}
                 />
               </div>
             </div>
 
-            {/* Leaf 3 — outer: parallax | inner: float */}
+            {/* Leaf 3 — Small accent bottom-right
+                Always behind image for subtle background depth */}
             <div
               ref={leaf3Ref}
-              className="absolute bottom-8 -right-2 md:bottom-12 md:-right-6 z-[5] rotate-45"
+              className="absolute bottom-8 -right-2 md:bottom-12 md:-right-6 z-[3] rotate-45"
               style={{ opacity: 0, willChange: 'transform' }}
             >
               <div ref={leaf3InnerRef} style={{ willChange: 'transform' }}>
@@ -540,7 +549,10 @@ export default function HeroSection() {
                   alt="Botanical accent leaf at Spa Vibe spa in Indore" width={70} height={70}
                   className="pointer-events-none select-none"
                   priority={false}
-                  style={{ width: 'auto' }}
+                  style={{
+                    width: 'auto',
+                    filter: 'saturate(1.1) blur(0.5px) drop-shadow(0 2px 8px rgba(94,116,101,0.12))',
+                  }}
                 />
               </div>
             </div>

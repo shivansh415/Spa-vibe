@@ -47,6 +47,5 @@ export const siteConfig = {
     { label: 'Book Session', href: '#book-session' },
     { label: 'Why Us', href: '#why-us' },
     { label: 'Gallery', href: '#gallery' },
-    { label: 'Reviews', href: '#reviews' },
   ],
 } as const;
