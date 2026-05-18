@@ -1,11 +1,11 @@
-# The Ark Spa And Salon — claude.md
+# SPA VIBE — claude.md
 
 ## Project Overview
-**Project Name:** The Ark Spa And Salon  
-**Framework:** Next.js (App Router, already scaffolded as `spa-site`)  
-**Tech Stack:** React, Framer Motion, Tailwind CSS, next/image, next/font  
-**Design Vibe:** Japan × Thailand luxury spa — serene, warm, editorial, refined  
-**Goal:** Jaw-dropping Awwwards-level spa website with full booking flow → WhatsApp CTA
+**Project Name:** SPA VIBE  
+**Framework:** Next.js 16 (App Router, SPA)  
+**Tech Stack:** React 19, Framer Motion, Tailwind CSS 4, next/image, next/font  
+**Design Vibe:** Premium luxury spa — serene, warm, editorial, refined, light theme  
+**Goal:** High-end spa website with booking flow → WhatsApp CTA
 
 ---
 
@@ -17,23 +17,28 @@ You are an **Awwwards Hall of Fame web developer** — top 1% globally in UI/UX 
 ## Design Direction
 
 ### Aesthetic
-- **Japan × Thailand luxury fusion** — think Aman Resorts meets Kyoto ryokan
-- Warm cream/off-white (`#FAF7F2`) base, deep charcoal (`#1C1A18`), gold accent (`#C9A96E`), sage green (`#8A9B6E`)
+- **Premium luxury spa** — calming, refined, minimal, high-end
+- Warm cream/ivory (`#FBF8F3`) base, soft charcoal (`#2C2824`), muted gold accent (`#C4A265`), sage green (`#8E9E78`)
 - Typography: `Cormorant Garamond` for display headings (elegant, editorial), `DM Sans` for body (clean, modern)
-- Textures: subtle rice paper grain overlay, soft warm gradients, bokeh blur effects
-- Motion: slow, deliberate — like breathing. Nothing jarring. Parallax scrolling, fade-in-up on scroll, staggered reveals
-- Mood: peaceful, premium, healing, ancient wisdom meets modern luxury
+- Textures: subtle paper grain overlay, soft warm gradients
+- Motion: slow, deliberate — like breathing. Nothing jarring. Fade-in-up on scroll, staggered reveals
+- Mood: peaceful, premium, healing, modern luxury
+- **LIGHT THEME ONLY** — soft beige, warm white, cream, subtle gold accents
 
 ### Color Palette (CSS Variables)
 ```css
---cream: #FAF7F2;
---charcoal: #1C1A18;
---gold: #C9A96E;
---gold-light: #E8D5A3;
---sage: #8A9B6E;
---warm-white: #F5F0E8;
+--cream: #FBF8F3;
+--charcoal: #2C2824;
+--gold: #C4A265;
+--gold-light: #D9C28E;
+--gold-dark: #A88B4A;
+--sage: #8E9E78;
+--warm-white: #F5F0E6;
 --deep-brown: #3D2B1F;
---mist: rgba(250, 247, 242, 0.85);
+--beige: #EDE6DA;
+--ivory: #FDFBF7;
+--mist: rgba(251, 248, 243, 0.92);
+--rose-mist: #F0E4DC;
 ```
 
 ### Typography
@@ -50,353 +55,153 @@ const dmSans = DM_Sans({ subsets: ['latin'], weight: ['300','400','500'] })
 ```
 spa-site/
 ├── app/
-│   ├── layout.tsx          ← Root layout, fonts, metadata, cursor
+│   ├── layout.tsx          ← Root layout, fonts, metadata
 │   ├── page.tsx            ← Main page (all sections)
 │   └── globals.css         ← Global styles, CSS vars, animations
 ├── components/
-│   ├── Preloader.tsx       ← Creative off-white preloader with candle+leaf animation
+│   ├── Preloader.tsx       ← Creative preloader with candle+leaf animation
 │   ├── Cursor.tsx          ← Custom glowing cursor
 │   ├── Navbar.tsx          ← Transparent → solid on scroll, logo + nav + CTA
-│   ├── Hero.tsx            ← Full-screen hero with video background
+│   ├── Hero.tsx            ← Full-screen hero with local video background
 │   ├── VideoSection.tsx    ← Cinematic video showcase section
-│   ├── Services.tsx        ← Services grid (ref image 4 style)
-│   ├── Pricing.tsx         ← Pricing cards with Thailand/Japan aesthetic
-│   ├── About.tsx           ← Philosophy section with quote (ref image 3)
-│   ├── Gallery.tsx         ← Masonry photo gallery
+│   ├── Services.tsx        ← Services grid
+│   ├── Pricing.tsx         ← Pricing cards
+│   ├── About.tsx           ← Philosophy section with quote
+│   ├── Gallery.tsx         ← Masonry photo gallery with lightbox
 │   ├── Testimonials.tsx    ← Customer reviews carousel
-│   ├── BookingModal.tsx    ← Full booking flow modal
-│   └── Footer.tsx          ← Rich footer
+│   ├── BookingModal.tsx    ← Full booking flow modal → WhatsApp
+│   ├── SmoothScroll.tsx    ← Lenis smooth scrolling wrapper
+│   └── Footer.tsx          ← Rich footer with contact info
+├── config/
+│   └── site.ts             ← Central site configuration (branding, contact, media)
+├── utils/
+│   └── whatsapp.ts         ← WhatsApp booking integration
 ├── public/
-│   └── (images + videos fetched from Unsplash/Pexels)
+│   └── homebg.mp4          ← Local hero/background video
 └── package.json
 ```
+
+---
+
+## Branding & Contact
+
+### Brand Name
+**SPA VIBE** (used everywhere throughout the site)
+
+### Contact Details
+```
+Contact for Appointments:
++91-9755500377
++91-9755507408
+```
+
+### Location
+```
+G-01, Ground Floor, Samiksh Landmark, Choithram Circle, 
+Choithram Mandi, Indore, Madhya Pradesh 452012
+```
+
+### WhatsApp Number
+`919755500377` (primary, country code included, no plus sign)
+
+### Hours
+Mon–Sat 10AM–7PM
 
 ---
 
 ## Section-by-Section Specs
 
 ### 1. Preloader (`Preloader.tsx`)
-- **Background:** Off-white `#FAF7F2`
-- **Animation sequence (Framer Motion):**
-  1. A single animated candle flame SVG flickers in (hand-drawn style, gold stroke)
-  2. Falling sakura/leaf particles drift down (CSS keyframe animation)
-  3. Text: "The Ark Spa & Salon" types/fades in with `Cormorant Garamond` italic, gold color
-  4. A horizontal golden line sweeps across
-  5. Whole preloader slides up revealing the site (like a curtain lift)
-- **Duration:** 2.8 seconds total, then unmounts
-- **Performance:** No heavy assets, pure SVG + CSS
-
-```tsx
-// Candle SVG animation - flame flickers via SVG path morphing
-// Leaf falls via translateY + rotate keyframes
-// Exit: y: '-100%', transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1] }
-```
+- **Background:** Cream `#FBF8F3`
+- Animated candle flame SVG + falling sakura leaves
+- "SPA VIBE" fades in with golden sweep line
+- Duration: 2.8 seconds, slides up on exit
 
 ### 2. Custom Cursor (`Cursor.tsx`)
-- Small dot (4px, gold `#C9A96E`) + larger ring (32px, 1px gold border, slight blur)
-- Ring follows with lag (spring: stiffness 150, damping 20)
-- On hover over buttons/links: ring expands to 60px, fills with gold 20% opacity, text inside says "tap" or "view"
-- On hover over images: ring shows crosshair style
-- Hidden on mobile (pointer: none)
+- Small dot (6px, gold) + larger ring (32px, gold border)
+- Ring expands on button/link hover, crosshair on images
+- Hidden on touch devices
 
 ### 3. Navbar (`Navbar.tsx`)
-- **Initial state:** Fully transparent, white text/logo
-- **Scrolled state:** Backdrop-blur `blur(20px)`, cream background 85% opacity, dark text
-- **Logo:** "THE ARK" in Cormorant Garamond spaced tracking, with a small lotus/leaf SVG icon
-- **Nav links:** About | Services | Treatments | Gallery | Pricing
-- **CTA Button:** "Book Appointment →" — gold border, gold text, hover: gold fill, dark text. Smooth underline animation on nav links
-- **Mobile:** Hamburger → full-screen overlay menu with staggered link animations
+- Transparent → cream backdrop-blur on scroll
+- Logo: "SPA VIBE" in Cormorant Garamond with lotus SVG icon
+- Nav links: About | Services | Treatments | Gallery
+- CTA: "Book Appointment →"
+- Mobile: hamburger → full-screen overlay
 
-### 4. Hero Section (`Hero.tsx`)
-- **Full viewport (100vh)**
-- **Background:** Autoplay muted loop video (spa/massage ambience) from Pexels CDN:
-  `https://www.pexels.com/video/woman-getting-a-back-massage-3188/`
-  Use `<video>` tag with `autoPlay muted loop playsInline` + dark overlay `rgba(28,26,24,0.45)`
-- **Content (centered, left-aligned on desktop):**
-  ```
-  [small gold tag] ✦ Premium Spa Experience
-  
-  GOLDEN
-  MOMENTS           ← Cormorant Garamond 120px, white, italic
-  AWAIT YOU
-  
-  [body] Surrender to ancient healing rituals.
-         Body, mind, and soul — restored.
-  
-  [CTA] Book Your Session →    [secondary] Explore Services
-  ```
-- **Animated:** Words slide up with stagger on load
-- **Scroll indicator:** Animated bouncing arrow at bottom center
-- **Stats strip:** After hero, a warm-bg strip: "13K+ Happy Clients | 4.9★ Rating | 5K+ Treatments | Since 2015"
+### 4. Hero (`Hero.tsx`)
+- Full viewport with local video (`/homebg.mp4`)
+- Smooth fade-in on video load (no flicker)
+- "Discover Pure Tranquility" heading
+- CTA buttons: "Book Your Session" + "Explore Services"
+- Stats strip: 13K+ Clients | 4.9★ Rating | 5K+ Treatments | Since 2015
+- Marquee scrolling strip with hours and features
 
-### 5. About / Philosophy Section
-- Split layout: large editorial text left, stacked images right (collage style)
-- Pull quote: *"Everyone deserves a place to find their inner peace. At The Ark, we create moments of care, comfort, and renewal."*
-- Stats cards: 98% Customer Satisfaction | 5K+ Annual Treatments | 4.9/5 Excellence
-- Background: warm gradient `#FAF7F2` → `#F0E8D8`
-- Subtle leaf/botanical SVG decorations
+### 5. About (`About.tsx`)
+- Split layout: editorial text + image collage
+- Quote: "At SPA VIBE, we create moments of care, comfort, and renewal."
+- Stats: 98% Satisfaction | 5K+ Treatments | 4.9/5 Rating
 
 ### 6. Video Section (`VideoSection.tsx`)
-- **Cinematic full-width section**
-- Two side-by-side video tiles OR one large video + one text panel
-- Pexels spa videos (embed via CDN):
-  - `https://player.vimeo.com/video/` OR direct pexels video links
-  - Suggested: candle+towel ambience, facial massage, couple relaxing
-- Play button: large circle with play icon, gold ring animation on hover
-- Caption: "A Sanctuary For Your Senses"
-- Videos lazy-load (IntersectionObserver)
+- Local video with play/pause toggle
+- Side panel with descriptive text
+- "A Sanctuary For Your Senses" heading
 
-### 7. Services Grid (`Services.tsx`)
-- **Layout:** 3-column grid (ref image 4 style), each card has:
-  - Full image (rounded corners 12px)
-  - Service name in Cormorant Garamond
-  - Short description in DM Sans
-  - Hover: image scales 1.05, gold border appears, "Book Now" CTA fades in
-- **Services List:**
-  1. Body Spa
-  2. Body Massage
-  3. Swedish Massage
-  4. Balinese Massage
-  5. Aroma Massage
-  6. Deep Tissue Massage
-  7. Healing Touch Massage
-  8. Lomi Lomi Massage
-  9. Relax Signature Massage
-  10. Couple Massage
-  11. Four Hand Massage
-  12. Foot Massage
-  13. Hair Spa
-  14. Face Massage
-  15. Facial & Skin Treatments
-- **Images:** Fetch from Unsplash spa collection:
-  ```
-  https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=600&q=80  (massage)
-  https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?w=600&q=80  (facial)
-  https://images.unsplash.com/photo-1519823551278-64ac92734fb1?w=600&q=80  (spa stones)
-  https://images.unsplash.com/photo-1507652313519-d4e9174996dd?w=600&q=80  (couple spa)
-  https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=600&q=80  (aromatherapy)
-  https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=600&q=80  (face massage)
-  https://images.unsplash.com/photo-1515377905703-c4788e51af15?w=600&q=80  (foot massage)
-  https://images.unsplash.com/photo-1611073613226-e6c8b9a37990?w=600&q=80  (hair spa)
-  https://images.unsplash.com/photo-1561457013-a8b23513739a?w=600&q=80  (body scrub)
-  ```
+### 7. Services (`Services.tsx`)
+- 15 services in 3-column grid (show 6, expand to all)
+- Service cards with hover effects and "Book Now" CTA
+- Images from Unsplash
 
-### 8. Pricing Section (`Pricing.tsx`)
-- **3 tiers** displayed as elegant cards on warm bg:
-
-| Service | Duration | Price |
-|---|---|---|
-| **Signature Ritual** | 60 min | ₹999 |
-| **Royal Indulgence** | 90 min | ₹1499 |
-| **The Ark Experience** | 120 min | ₹1999 |
-
-- Also list individual treatments:
-  ```
-  Hair Spa (Soft Mind)     60 min  ₹499
-  Hair Spa (Full Mind)     90 min  ₹799
-  Body Massage (Mini)      60 min  ₹699
-  Body Massage (Full)      90 min  ₹999
-  Face Massage             50 min  ₹599
-  Couple Massage           90 min  ₹2499
-  Foot Massage             45 min  ₹399
-  ```
-- Card design: cream background, gold top border accent, Cormorant Garamond pricing, hover lift + gold shadow
-- Middle card highlighted: slightly larger, gold background tint, "Most Popular" badge
+### 8. Pricing (`Pricing.tsx`)
+- 3 tiers: Signature Ritual (₹999) | Royal Indulgence (₹1499) | The Vibe Experience (₹1999)
+- Individual treatments list below
+- Middle card highlighted as "Most Popular"
 
 ### 9. Gallery (`Gallery.tsx`)
-- Masonry/Pinterest grid layout
-- 9-12 images from Unsplash spa collection
-- Hover: smooth overlay with service name + "View" text
-- Lightbox on click (use `yet-another-react-lightbox` or custom)
-- Section title: "MOMENTS OF BLISS" with decorative gold lines
+- Masonry grid with 12 images
+- Hover overlay with labels
+- Lightbox with navigation
 
 ### 10. Testimonials (`Testimonials.tsx`)
-- Auto-sliding carousel (Framer Motion drag + auto-advance)
-- Each card: star rating, quote text, client name, treatment received
-- Large decorative quote marks in gold
-- Background: deep charcoal `#1C1A18` for contrast section break
+- Auto-sliding carousel with 5 testimonials
+- Star ratings, quotes, attribution
+- Dark background for contrast
 
-### 11. Booking Modal (`BookingModal.tsx`) ← MOST IMPORTANT
-**Trigger:** Any "Book Appointment" CTA opens this modal
-
-**Step 1 — Select Service**
-- Service dropdown or card selection grid
-- Animated step indicator at top (1 → 2 → 3 → 4)
-
-**Step 2 — Select Date**
-- Custom calendar (ref image 1 style)
-- Only Mon–Sat selectable
-- Selected date highlighted in charcoal/gold
-- No past dates
-
-**Step 3 — Select Time**
-- Time slots grid: 9:00 AM to 7:00 PM (1hr slots)
-- Available = cream bg; Selected = charcoal bg gold text
-- Layout: responsive grid of pill buttons
-
-**Step 4 — Your Details**
-- Name field (required)
-- Phone number field (required)  
-- Optional message textarea: "Anything specific you'd like us to know?"
-- Validation: name + phone required
-
-**Step 5 — Confirm → WhatsApp**
-```tsx
-const handleBooking = () => {
-  const message = encodeURIComponent(
-    `🌿 *New Appointment Request — The Ark Spa & Salon*\n\n` +
-    `👤 *Name:* ${name}\n` +
-    `📱 *Phone:* ${phone}\n` +
-    `💆 *Service:* ${selectedService}\n` +
-    `📅 *Date:* ${selectedDate}\n` +
-    `⏰ *Time:* ${selectedTime}\n` +
-    `📝 *Message:* ${message || 'No special requests'}\n\n` +
-    `_Sent via The Ark Spa website_`
-  );
-  window.open(`https://wa.me/916265581678?text=${message}`, '_blank');
-};
-```
-
-**Modal Design:**
-- Slides up from bottom on mobile, centered overlay on desktop
-- Backdrop blur on page behind
-- Smooth step transitions (Framer Motion `AnimatePresence`)
-- Gold progress bar at top showing step completion
-- Close button top-right
+### 11. BookingModal (`BookingModal.tsx`)
+- 5-step flow: Service → Date → Time → Details → Confirm via WhatsApp
+- Calendar with Mon-Sat only (no Sundays)
+- Sends formatted message to WhatsApp
 
 ### 12. Footer (`Footer.tsx`)
-- Dark background `#1C1A18`
-- Logo + tagline
-- Links: Services | Pricing | Gallery | Book Now
-- Contact: 📍 [Your City] | 📞 +91 62655 81678 | 🕐 Mon–Sat 10AM–7PM
-- Social icons: Instagram, Facebook, WhatsApp
-- Bottom: "© 2025 The Ark Spa And Salon. Crafted with ✦"
-- Subtle floating botanical SVG elements
+- Dark background with brand, links, contact info
+- Shows both phone numbers with "Contact for Appointments" label
+- Full address with Google Maps link
+- Social links: Instagram, Facebook, WhatsApp
 
 ---
 
-## Animations Master Plan (Framer Motion)
-
-```tsx
-// Page entry - staggered hero text
-const stagger = {
-  visible: { transition: { staggerChildren: 0.12 } }
-}
-const fadeUp = {
-  hidden: { y: 60, opacity: 0 },
-  visible: { y: 0, opacity: 1, transition: { duration: 0.9, ease: [0.22, 1, 0.36, 1] } }
-}
-
-// Scroll-triggered sections
-// Use Framer Motion's useInView hook
-const { ref, inView } = useInView({ threshold: 0.2, once: true })
-
-// Service cards hover
-whileHover={{ y: -8, boxShadow: '0 24px 48px rgba(201,169,110,0.2)' }}
-
-// Navbar transition
-animate={{ backgroundColor: scrolled ? 'rgba(250,247,242,0.9)' : 'transparent' }}
-
-// Modal slide up
-initial={{ y: '100%' }} animate={{ y: 0 }} exit={{ y: '100%' }}
-transition={{ type: 'spring', damping: 30, stiffness: 300 }}
-```
-
----
-
-## Performance Requirements
-- All images: `next/image` with proper `sizes` prop, lazy loading
-- Videos: `loading="lazy"`, IntersectionObserver to play only in viewport
-- Fonts: `next/font` (no FOUT), `display: swap`
-- Code splitting: each section as dynamic import where possible
-- No layout shift: all image dimensions specified
-- Tailwind purge: ensure only used classes bundled
-- Target: Lighthouse 90+ Performance, 100 Accessibility
-
----
-
-## Package Dependencies
-```json
-{
-  "dependencies": {
-    "next": "14.x",
-    "react": "18.x",
-    "framer-motion": "^11",
-    "tailwindcss": "^3",
-    "@tailwindcss/typography": "latest",
-    "yet-another-react-lightbox": "latest",
-    "react-intersection-observer": "latest",
-    "clsx": "latest",
-    "date-fns": "latest"
-  }
-}
-```
+## Performance & Optimization
+- Video: locally hosted (`/homebg.mp4`) with `preload="auto"` and smooth fade-in
+- Images: `next/image` with `loading="lazy"` and proper `sizes` prop
+- Fonts: `next/font/google` with `display: swap`
+- Smooth scrolling: Lenis library
+- Animations: Framer Motion with `viewport={{ once: true }}`
+- Build: Next.js 16 Turbopack
 
 ---
 
 ## Critical Rules
-1. **NO generic AI aesthetics** — no purple gradients, no Inter font, no boring cards
-2. **Every hover state** must feel intentional and premium
-3. **Mobile-first** — all sections must be beautiful on 375px screens
-4. **Booking modal** is the #1 priority — must work flawlessly
-5. **WhatsApp number:** `916265581678` (country code included)
-6. **Preloader** always runs on first load, stored in sessionStorage so it doesn't repeat on navigation
-7. **Cursor** disabled on touch devices
-8. **Smooth scroll** behavior on html element
-9. **All text** must be readable at all viewport sizes (min 16px body)
-10. **Japan × Thailand vibe** must be felt in every section — through typography, spacing, color, and imagery
+1. **Brand name is SPA VIBE** — never "The Ark"
+2. **Light theme only** — no dark mode
+3. **Every hover state** must feel intentional and premium
+4. **Mobile-first** responsive design
+5. **Booking modal** is the #1 priority — must work flawlessly
+6. **WhatsApp number:** `919755500377`
+7. **Contact phones:** `+91-9755500377` and `+91-9755507408`
+8. **Address:** G-01, Ground Floor, Samiksh Landmark, Choithram Circle, Choithram Mandi, Indore, Madhya Pradesh 452012
+9. **Cursor** disabled on touch devices
+10. **All configuration** centralized in `src/config/site.ts`
 
 ---
 
-## Spa Images (Unsplash — Free CDN, No Attribution Needed for Prototype)
-```
-Hero BG (video): https://www.pexels.com/video/hands-massaging-the-back-of-a-client-3750378/
-Massage 1: https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=800&q=80
-Massage 2: https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?w=800&q=80
-Stones: https://images.unsplash.com/photo-1519823551278-64ac92734fb1?w=800&q=80
-Couple: https://images.unsplash.com/photo-1507652313519-d4e9174996dd?w=800&q=80
-Aroma: https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=800&q=80
-Facial: https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=800&q=80
-Foot: https://images.unsplash.com/photo-1515377905703-c4788e51af15?w=800&q=80
-Candle: https://images.unsplash.com/photo-1607006344380-b6775a0824a7?w=800&q=80
-Flowers: https://images.unsplash.com/photo-1600618528240-fb9fc964b853?w=800&q=80
-Interior: https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&q=80
-Bath: https://images.unsplash.com/photo-1591343395082-e120087004b4?w=800&q=80
-```
-
----
-
-## WhatsApp Booking Integration
-```typescript
-// utils/whatsapp.ts
-export const openWhatsAppBooking = (details: BookingDetails) => {
-  const { name, phone, service, date, time, message } = details;
-  
-  const formattedDate = new Intl.DateTimeFormat('en-IN', {
-    weekday: 'long',
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric'
-  }).format(new Date(date));
-  
-  const text = [
-    `🌿 *New Appointment — The Ark Spa & Salon*`,
-    ``,
-    `👤 Name: ${name}`,
-    `📱 Phone: ${phone}`,
-    `💆 Service: ${service}`,
-    `📅 Date: ${formattedDate}`,
-    `⏰ Time: ${time}`,
-    message ? `📝 Note: ${message}` : null,
-    ``,
-    `_Booked via website_`
-  ].filter(Boolean).join('\n');
-  
-  const url = `https://wa.me/916265581678?text=${encodeURIComponent(text)}`;
-  window.open(url, '_blank', 'noopener');
-};
-```
-
----
-
-*This file is the single source of truth for the entire spa-site build. Every design decision, component spec, animation detail, and integration requirement is documented here. Build with excellence.*
+*This file is the single source of truth for the SPA VIBE website build.*

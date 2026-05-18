@@ -1,7 +1,12 @@
-import type { Metadata } from 'next';
-import { Cormorant_Garamond, DM_Sans } from 'next/font/google';
+import type { Metadata, Viewport } from 'next';
+import { Cormorant_Garamond, Poppins } from 'next/font/google';
 import './globals.css';
 
+import { SmoothScrollProvider } from '@/lib/smooth-scroll';
+
+/* ──────────────────────────────────────────────
+   Font Configuration
+   ────────────────────────────────────────────── */
 const cormorant = Cormorant_Garamond({
   subsets: ['latin'],
   weight: ['300', '400', '500', '600', '700'],
@@ -10,38 +15,48 @@ const cormorant = Cormorant_Garamond({
   display: 'swap',
 });
 
-const dmSans = DM_Sans({
+const poppins = Poppins({
   subsets: ['latin'],
-  weight: ['300', '400', '500'],
-  variable: '--font-dm-sans',
+  weight: ['300', '400', '500', '600'],
+  variable: '--font-poppins',
   display: 'swap',
 });
 
+/* ──────────────────────────────────────────────
+   SEO Metadata
+   ────────────────────────────────────────────── */
 export const metadata: Metadata = {
-  title: 'The Ark Spa & Salon — Premium Spa Experience',
+  title: 'SPA VIBE — Premium Spa & Wellness Experience in Indore',
   description:
-    'Surrender to ancient healing rituals at The Ark Spa & Salon. Japanese & Thai luxury fusion spa offering body massage, aromatherapy, facials, and more. Book your session today.',
+    'Discover pure tranquility at SPA VIBE. Premium spa offering body massage, aromatherapy, facials, and holistic wellness treatments in Indore. Book your session today.',
   keywords: [
-    'spa',
-    'salon',
-    'massage',
-    'aromatherapy',
-    'body spa',
-    'facial',
-    'luxury spa',
-    'relaxation',
-    'wellness',
+    'spa', 'spa indore', 'body massage', 'aromatherapy', 'facial',
+    'luxury spa', 'wellness', 'relaxation', 'spa vibe', 'body spa indore',
+    'premium spa', 'massage therapy', 'holistic wellness',
   ],
   openGraph: {
-    title: 'The Ark Spa & Salon — Premium Spa Experience',
-    description:
-      'Surrender to ancient healing rituals. Body, mind, and soul — restored.',
+    title: 'SPA VIBE — Premium Spa & Wellness Experience',
+    description: 'Discover pure tranquility. Body, mind, and soul — restored.',
     type: 'website',
+    locale: 'en_IN',
+    siteName: 'SPA VIBE',
+  },
+  robots: {
+    index: true,
+    follow: true,
   },
 };
 
-import SmoothScroll from '@/components/SmoothScroll';
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: '#F8F4F1',
+};
 
+/* ──────────────────────────────────────────────
+   Root Layout
+   ────────────────────────────────────────────── */
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -50,13 +65,13 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${cormorant.variable} ${dmSans.variable} antialiased`}
+      className={`${cormorant.variable} ${poppins.variable}`}
       suppressHydrationWarning
     >
-      <body className="grain-overlay" suppressHydrationWarning>
-        <SmoothScroll>
+      <body className="grain-overlay antialiased" suppressHydrationWarning>
+        <SmoothScrollProvider>
           {children}
-        </SmoothScroll>
+        </SmoothScrollProvider>
       </body>
     </html>
   );
