@@ -22,17 +22,25 @@ const SECTION_IDS = NAV_ITEMS.map((item) => item.href.replace('#', ''));
 
 /* ─────────────────────────────────────
    Smooth scroll with navbar offset
+   Compatible with Lenis smooth scroll
 ───────────────────────────────────── */
 function scrollToSection(href: string) {
   const id = href.replace('#', '');
   const el = document.getElementById(id);
   if (!el) {
-    // Fallback — top of page for #home
     window.scrollTo({ top: 0, behavior: 'smooth' });
     return;
   }
-  const top = el.getBoundingClientRect().top + window.scrollY - NAVBAR_OFFSET;
-  window.scrollTo({ top, behavior: 'smooth' });
+
+  // Use Lenis if available for consistency
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const lenis = (window as any).__lenis;
+  if (lenis) {
+    lenis.scrollTo(el, { offset: -NAVBAR_OFFSET, duration: 1.2 });
+  } else {
+    const top = el.getBoundingClientRect().top + window.scrollY - NAVBAR_OFFSET;
+    window.scrollTo({ top, behavior: 'smooth' });
+  }
 }
 
 /* ─────────────────────────────────────
@@ -117,10 +125,10 @@ const MobileMenu = ({
   useBodyScrollLock(isOpen);
 
   const handleLink = useCallback((href: string) => {
+    onClose();  // close menu first
     setTimeout(() => {
-      scrollToSection(href);
-      onClose();
-    }, 120);
+      scrollToSection(href);  // then scroll after close animation
+    }, 280);
   }, [onClose]);
 
   return (

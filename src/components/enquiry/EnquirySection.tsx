@@ -135,6 +135,7 @@ export default function EnquirySection() {
       <section
         ref={sectionRef}
         id="book-session"
+        aria-label="Book a spa session at Spa Vibe, Indore"
         style={{
           background: 'linear-gradient(180deg, var(--color-linen) 0%, var(--color-cream) 100%)',
           position: 'relative',

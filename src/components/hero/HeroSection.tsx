@@ -284,6 +284,7 @@ export default function HeroSection() {
     <section
       ref={sectionRef}
       id="home"
+      aria-label="Hero section — Spa Vibe, best luxury spa in Indore"
       className="relative min-h-screen flex items-center overflow-hidden"
       style={{ backgroundColor: 'var(--color-linen)' }}
     >
@@ -471,8 +472,8 @@ export default function HeroSection() {
                   style={{ borderRadius: '200px 200px 120px 120px' }}
                 >
                   <Image
-                    src="/images/hero/hero-woman.webp"
-                    alt="Luxury spa wellness treatment at Spa Vibe, the best spa in Indore"
+                    src="/images/hero/hero-man-spa.webp"
+                    alt="Professional body massage therapy at Spa Vibe, the best luxury spa in Indore"
                     fill
                     priority
                     className="object-cover object-top"

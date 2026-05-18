@@ -171,6 +171,7 @@ export default function WhySection() {
       <section
         ref={sectionRef}
         id="why-us"
+        aria-label="Why choose Spa Vibe — best wellness spa in Indore"
         style={{
           background: 'linear-gradient(180deg, var(--color-cream) 0%, var(--color-linen) 100%)',
           position: 'relative',

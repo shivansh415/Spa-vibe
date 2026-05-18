@@ -154,7 +154,7 @@ export default function GallerySection() {
         @media (max-width:767px) { .desktop-gallery { display:none !important; } }
       `}</style>
 
-      <section id="gallery" style={{ background: 'var(--color-cream)', position: 'relative' }}>
+      <section id="gallery" aria-label="Spa Vibe gallery — luxury spa moments in Indore" style={{ background: 'var(--color-cream)', position: 'relative' }}>
 
         {/* ── Heading ── */}
         <div ref={headingRef} style={{

@@ -130,6 +130,7 @@ export default function CTASection() {
       <section
         ref={sectionRef}
         id="cta"
+        aria-label="Book your spa experience at Spa Vibe Indore"
         style={{
           position: 'relative',
           overflow: 'hidden',

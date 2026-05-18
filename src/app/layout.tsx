@@ -115,6 +115,17 @@ export const metadata: Metadata = {
   category: 'Health & Wellness',
   creator: 'Spa Vibe',
   publisher: 'Spa Vibe',
+
+  /* ── Geo tags for local SEO ── */
+  other: {
+    'geo.region': 'IN-MP',
+    'geo.placename': 'Indore',
+    'geo.position': '22.6786485;75.8515614',
+    'ICBM': '22.6786485, 75.8515614',
+    'revisit-after': '7 days',
+    'rating': 'general',
+    'format-detection': 'telephone=yes',
+  },
 };
 
 export const viewport: Viewport = {
@@ -316,6 +327,10 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head>
+        {/* Preconnect for third-party resources */}
+        <link rel="preconnect" href="https://api.mapbox.com" />
+        <link rel="dns-prefetch" href="https://api.mapbox.com" />
+
         {/* JSON-LD Structured Data — rendered as raw script tags for crawlers */}
         <script
           type="application/ld+json"
@@ -335,6 +350,14 @@ export default function RootLayout({
         />
       </head>
       <body className="grain-overlay antialiased" suppressHydrationWarning>
+        <noscript>
+          <div style={{ padding: '20px', textAlign: 'center', fontFamily: 'sans-serif' }}>
+            <h1>Spa Vibe — Best Luxury Spa in Indore</h1>
+            <p>Premium body massage, couple spa, aromatherapy & wellness treatments.</p>
+            <p>Address: G-01, Ground Floor, Samiksh Landmark, Choithram Circle, Indore, MP 452012</p>
+            <p>Call: +91-9755500377 | Hours: Mon-Sun 10:30AM-11:30PM</p>
+          </div>
+        </noscript>
         <SmoothScrollProvider>
           {children}
         </SmoothScrollProvider>

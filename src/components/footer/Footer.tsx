@@ -53,6 +53,8 @@ export default function Footer() {
 
       <footer
         id="contact"
+        role="contentinfo"
+        aria-label="Spa Vibe contact information and address in Indore"
         style={{
           background: 'var(--color-charcoal)',
           color: 'var(--color-cream)',
@@ -120,13 +122,13 @@ export default function Footer() {
 
             {/* ── Column 2: Visit Us ── */}
             <div>
-              <h4 style={{
+              <h3 style={{
                 fontFamily: 'var(--font-display)', fontSize: '13px',
                 fontWeight: 400, letterSpacing: '0.18em', textTransform: 'uppercase',
                 color: 'var(--color-rose)', marginBottom: '18px',
               }}>
                 Visit Us
-              </h4>
+              </h3>
               <p style={{
                 fontFamily: 'var(--font-body)', fontSize: '13px',
                 fontWeight: 300, color: 'rgba(248,244,241,0.65)',
@@ -146,13 +148,13 @@ export default function Footer() {
 
             {/* ── Column 3: Contact + Hours ── */}
             <div>
-              <h4 style={{
+              <h3 style={{
                 fontFamily: 'var(--font-display)', fontSize: '13px',
                 fontWeight: 400, letterSpacing: '0.18em', textTransform: 'uppercase',
                 color: 'var(--color-rose)', marginBottom: '18px',
               }}>
                 Get in Touch
-              </h4>
+              </h3>
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                 {siteConfig.contact.phones.map((phone) => (
@@ -210,7 +212,7 @@ export default function Footer() {
               &copy; {CURRENT_YEAR} Spa Vibe. All rights reserved.
             </p>
 
-            <div style={{ display: 'flex', gap: '10px' }}>
+            <nav aria-label="Social media links" style={{ display: 'flex', gap: '10px' }}>
               <a href={siteConfig.socials.instagram} target="_blank" rel="noopener noreferrer" className="footer-social-link" aria-label="Instagram">
                 <InstagramIcon />
               </a>
@@ -220,7 +222,7 @@ export default function Footer() {
               <a href={`https://wa.me/${WA_NUMBER}`} target="_blank" rel="noopener noreferrer" className="footer-social-link" aria-label="WhatsApp">
                 <WhatsAppIcon />
               </a>
-            </div>
+            </nav>
           </div>
         </div>
       </footer>

@@ -112,8 +112,9 @@ export default function Preloader() {
           {/* Candle */}
           <CandleFlame />
 
-          {/* Brand name */}
-          <motion.h1
+          {/* Brand name — NOT an h1 to avoid duplicate H1 with hero section */}
+          <motion.div
+            aria-hidden="true"
             className="mt-8 tracking-[0.3em] uppercase"
             style={{
               fontFamily: 'var(--font-display)',
@@ -127,7 +128,7 @@ export default function Preloader() {
             transition={{ delay: 0.8, duration: 0.9, ease: ease.smooth }}
           >
             SPA VIBE
-          </motion.h1>
+          </motion.div>
 
           {/* Line sweep */}
           <motion.div

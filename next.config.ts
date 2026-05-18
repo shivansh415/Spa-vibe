@@ -1,18 +1,48 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  /* ── Image Optimization ── */
   images: {
-    minimumCacheTTL: 0, // Disable image cache so updated images show immediately
+    formats: ['image/avif', 'image/webp'],  // Prefer AVIF, fallback to WebP
+    minimumCacheTTL: 31536000,               // 1 year cache for optimized images
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     remotePatterns: [
       {
         protocol: 'https',
         hostname: 'images.unsplash.com',
       },
-      {
-        protocol: 'https',
-        hostname: 'videos.pexels.com',
-      },
     ],
+  },
+
+  /* ── Performance ── */
+  compress: true,
+
+  /* ── Headers for caching & security ── */
+  async headers() {
+    return [
+      {
+        source: '/(.*)',
+        headers: [
+          { key: 'X-Content-Type-Options', value: 'nosniff' },
+          { key: 'X-Frame-Options', value: 'DENY' },
+          { key: 'X-XSS-Protection', value: '1; mode=block' },
+          { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
+        ],
+      },
+      {
+        source: '/images/(.*)',
+        headers: [
+          { key: 'Cache-Control', value: 'public, max-age=31536000, immutable' },
+        ],
+      },
+      {
+        source: '/_next/static/(.*)',
+        headers: [
+          { key: 'Cache-Control', value: 'public, max-age=31536000, immutable' },
+        ],
+      },
+    ];
   },
 };
 
