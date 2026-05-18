@@ -166,6 +166,25 @@ export default function WhySection() {
           background: rgba(221,183,175,0.18) !important;
           transform: scale(1.08);
         }
+        /* Mobile: stack features vertically with image first */
+        @media (max-width: 767px) {
+          .why-grid {
+            grid-template-columns: 1fr !important;
+            gap: 32px !important;
+          }
+          .why-grid > div:nth-child(2) {
+            order: -1;
+            max-width: 280px;
+            margin: 0 auto;
+          }
+          .why-grid > div:first-child,
+          .why-grid > div:last-child {
+            align-items: flex-start !important;
+          }
+          .why-feature-block {
+            max-width: 100% !important;
+          }
+        }
       `}</style>
 
       <section
@@ -216,7 +235,7 @@ export default function WhySection() {
           </div>
 
           {/* ── 3-column layout: Left features | Center Image | Right features ── */}
-          <div style={{
+          <div className="why-grid" style={{
             display: 'grid',
             gridTemplateColumns: '1fr auto 1fr',
             gap: 'clamp(20px, 3vw, 50px)',

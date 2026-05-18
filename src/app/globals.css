@@ -131,9 +131,26 @@
    Base Styles
    ────────────────────────────────────────────── */
 html {
-  scroll-behavior: smooth;
   overflow-x: hidden;
   -webkit-text-size-adjust: 100%;
+}
+
+/* Lenis manages smooth scrolling — CSS scroll-behavior
+   conflicts with it on mobile, causing desync and jumps */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
 }
 
 body {
@@ -145,6 +162,19 @@ body {
   -moz-osx-font-smoothing: grayscale;
   line-height: 1.7;
   font-size: var(--text-base);
+}
+
+/* ── Mobile: prevent overscroll bounce from conflicting with GSAP pins ── */
+@media (max-width: 767px) {
+  html, body {
+    overscroll-behavior-y: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* GSAP pin-spacer — prevent overflow bleed on mobile */
+  .pin-spacer {
+    overflow: visible !important;
+  }
 }
 
 /* ──────────────────────────────────────────────

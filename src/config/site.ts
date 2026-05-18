@@ -31,8 +31,8 @@ export const siteConfig = {
 
   // ── Social ──
   socials: {
-    instagram: 'https://www.instagram.com/spavibesindore?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==',
-    facebook: 'https://www.facebook.com/people/Spa-Vibes/61574345188422/#',
+    instagram: 'https://www.instagram.com/spavibesindore',
+    facebook: 'https://www.facebook.com/people/Spa-Vibes/61574345188422/',
   },
 
   // ── Map ──

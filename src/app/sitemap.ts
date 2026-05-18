@@ -1,5 +1,12 @@
 import type { MetadataRoute } from 'next';
 
+/**
+ * Sitemap — spavibe.in
+ * 
+ * Only canonical page URLs are included. Hash fragments
+ * (e.g. /#gallery) are not valid sitemap entries — search
+ * engines strip fragments before processing.
+ */
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://spavibe.in';
 
@@ -9,24 +16,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 1.0,
-    },
-    {
-      url: `${baseUrl}/#book-session`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/#gallery`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/#why-us`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.7,
     },
   ];
 }

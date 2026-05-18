@@ -329,8 +329,9 @@ export default function EnquirySection() {
                 <form onSubmit={handleSubmit} noValidate>
                   {/* Name */}
                   <div style={{ marginBottom: '14px' }}>
-                    <label style={labelStyle}>Full Name</label>
+                    <label htmlFor="enquiry-name" style={labelStyle}>Full Name</label>
                     <input
+                      id="enquiry-name"
                       name="name" type="text" required placeholder="Your name"
                       value={form.name} onChange={handleChange}
                       onFocus={() => setFocused('name')} onBlur={() => setFocused(null)}
@@ -340,8 +341,9 @@ export default function EnquirySection() {
 
                   {/* Phone */}
                   <div style={{ marginBottom: '14px' }}>
-                    <label style={labelStyle}>Phone Number</label>
+                    <label htmlFor="enquiry-phone" style={labelStyle}>Phone Number</label>
                     <input
+                      id="enquiry-phone"
                       name="phone" type="tel" required placeholder="+91 XXXXX XXXXX"
                       value={form.phone} onChange={handleChange}
                       onFocus={() => setFocused('phone')} onBlur={() => setFocused(null)}
@@ -351,8 +353,9 @@ export default function EnquirySection() {
 
                   {/* Date */}
                   <div style={{ marginBottom: '14px' }}>
-                    <label style={labelStyle}>Preferred Date</label>
+                    <label htmlFor="enquiry-date" style={labelStyle}>Preferred Date</label>
                     <input
+                      id="enquiry-date"
                       name="date" type="date" required
                       value={form.date} onChange={handleChange}
                       onFocus={() => setFocused('date')} onBlur={() => setFocused(null)}
@@ -363,8 +366,9 @@ export default function EnquirySection() {
 
                   {/* Message */}
                   <div style={{ marginBottom: '24px' }}>
-                    <label style={labelStyle}>Message <span style={{ color: 'var(--color-stone)' }}>(optional)</span></label>
+                    <label htmlFor="enquiry-message" style={labelStyle}>Message <span style={{ color: 'var(--color-stone)' }}>(optional)</span></label>
                     <textarea
+                      id="enquiry-message"
                       name="message" rows={3} placeholder="Any special requests or health notes..."
                       value={form.message} onChange={handleChange}
                       onFocus={() => setFocused('message')} onBlur={() => setFocused(null)}

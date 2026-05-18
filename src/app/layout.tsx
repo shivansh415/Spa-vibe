@@ -322,7 +322,7 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
+      lang="en-IN"
       className={`${cormorant.variable} ${poppins.variable}`}
       suppressHydrationWarning
     >
@@ -330,6 +330,17 @@ export default function RootLayout({
         {/* Preconnect for third-party resources */}
         <link rel="preconnect" href="https://api.mapbox.com" />
         <link rel="dns-prefetch" href="https://api.mapbox.com" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+
+        {/* Preload hero image — LCP element needs browser-level priority */}
+        <link
+          rel="preload"
+          href="/images/hero/hero-man-spa.webp"
+          as="image"
+          type="image/webp"
+          fetchPriority="high"
+        />
 
         {/* JSON-LD Structured Data — rendered as raw script tags for crawlers */}
         <script

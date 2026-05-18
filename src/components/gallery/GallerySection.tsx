@@ -71,6 +71,17 @@ export default function GallerySection() {
 
     /* ── Mobile horizontal scroll ── */
     let mobileScrollTrigger: ScrollTrigger | null = null;
+    let mobileTween: gsap.core.Tween | null = null;
+
+    /**
+     * Measures the horizontal travel distance.
+     * Called each time ScrollTrigger refreshes to stay accurate.
+     */
+    const getDistance = (): number => {
+      const track = mobileTrackRef.current;
+      if (!track) return 0;
+      return Math.max(0, track.scrollWidth - window.innerWidth);
+    };
 
     const setupMobileScroll = () => {
       if (window.innerWidth >= 768) return;
@@ -79,54 +90,128 @@ export default function GallerySection() {
       const track = mobileTrackRef.current;
       if (!pin || !track) return;
 
-      // Kill any existing instance before recreating
+      // Kill any existing instances before recreating
+      mobileTween?.kill();
       mobileScrollTrigger?.kill();
+      mobileTween = null;
+      mobileScrollTrigger = null;
 
-      // The distance to travel = total track width minus one viewport width
-      const dist = track.scrollWidth - window.innerWidth;
+      const dist = getDistance();
       if (dist <= 0) return;
 
       gsap.set(track, { x: 0 }); // reset position
+
+      // Create the tween separately so we can kill it on cleanup
+      mobileTween = gsap.to(track, {
+        x: () => -getDistance(),  // functional value — re-evaluated on invalidate
+        ease: 'none',
+      });
 
       mobileScrollTrigger = ScrollTrigger.create({
         trigger: pin,
         pin: true,
         pinSpacing: true,
-        scrub: 1.4,
+        scrub: 1,           // slightly lower scrub for snappier response
         start: 'top top',
-        end: `+=${dist}`,
+        end: () => `+=${getDistance()}`,  // functional — recalculates on refresh
         invalidateOnRefresh: true,
         anticipatePin: 1,
-        animation: gsap.to(track, {
-          x: -dist,
-          ease: 'none',
-          duration: 1,  // duration is irrelevant when scrub is true
-        }),
+        animation: mobileTween,
+        onRefresh: (self) => {
+          // Ensure the pin container height stays correct after refresh
+          if (self.pin) {
+            (self.pin as HTMLElement).style.height = '100svh';
+          }
+        },
       });
     };
 
-    // Small delay to let images / fonts settle before measuring
-    const timer = setTimeout(() => {
-      setupMobileScroll();
-      ScrollTrigger.refresh();
-    }, 300);
+    /**
+     * Wait for all gallery images to load before measuring widths.
+     * Falls back to a 600ms timeout if images are slow.
+     */
+    const initMobileScroll = () => {
+      if (window.innerWidth >= 768) return;
 
-    // Recalculate on resize / orientation change
-    const handleResize = () => {
-      clearTimeout(timer);
-      setTimeout(() => {
-        mobileScrollTrigger?.kill();
+      const track = mobileTrackRef.current;
+      if (!track) return;
+
+      const images = track.querySelectorAll('img');
+      const imageCount = images.length;
+      let loadedCount = 0;
+      let hasInitialized = false;
+
+      const doInit = () => {
+        if (hasInitialized) return;
+        hasInitialized = true;
         setupMobileScroll();
         ScrollTrigger.refresh();
-      }, 200);
+      };
+
+      if (imageCount === 0) {
+        // No images — init immediately
+        doInit();
+        return;
+      }
+
+      images.forEach((img) => {
+        if (img.complete) {
+          loadedCount++;
+        } else {
+          img.addEventListener('load', () => {
+            loadedCount++;
+            if (loadedCount >= imageCount) doInit();
+          }, { once: true });
+          img.addEventListener('error', () => {
+            loadedCount++;
+            if (loadedCount >= imageCount) doInit();
+          }, { once: true });
+        }
+      });
+
+      // All images already loaded (cached)
+      if (loadedCount >= imageCount) {
+        // Small delay to let layout settle
+        setTimeout(doInit, 100);
+      }
+
+      // Safety fallback — if images take too long, init anyway
+      const fallback = setTimeout(doInit, 800);
+      timerRefs.push(fallback);
+    };
+
+    const timerRefs: ReturnType<typeof setTimeout>[] = [];
+
+    // Initial setup with a small delay for layout
+    const initTimer = setTimeout(() => {
+      initMobileScroll();
+    }, 150);
+    timerRefs.push(initTimer);
+
+    // Recalculate on resize / orientation change
+    let resizeTimer: ReturnType<typeof setTimeout> | null = null;
+    const handleResize = () => {
+      if (resizeTimer) clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        mobileTween?.kill();
+        mobileScrollTrigger?.kill();
+        mobileTween = null;
+        mobileScrollTrigger = null;
+        setupMobileScroll();
+        ScrollTrigger.refresh();
+      }, 250);
     };
     window.addEventListener('resize', handleResize);
+    window.addEventListener('orientationchange', handleResize);
 
     return () => {
-      clearTimeout(timer);
+      timerRefs.forEach(clearTimeout);
+      if (resizeTimer) clearTimeout(resizeTimer);
       window.removeEventListener('resize', handleResize);
+      window.removeEventListener('orientationchange', handleResize);
       headingCtx.revert();
       desktopCtx?.revert();
+      mobileTween?.kill();
       mobileScrollTrigger?.kill();
     };
   }, []);

@@ -150,6 +150,9 @@ const MobileMenu = ({
             style={{ backgroundColor: '#F8F4F1' }}
             initial={{ x: '100%' }} animate={{ x: 0 }} exit={{ x: '100%' }}
             transition={{ duration: 0.48, ease: ease.smooth }}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Navigation menu"
           >
             {/* Header */}
             <div className="flex items-center justify-between px-7 pt-7 pb-4">

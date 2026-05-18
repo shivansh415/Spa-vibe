@@ -476,6 +476,7 @@ export default function HeroSection() {
                     alt="Professional body massage therapy at Spa Vibe, the best luxury spa in Indore"
                     fill
                     priority
+                    fetchPriority="high"
                     className="object-cover object-top"
                     sizes="(max-width: 768px) 80vw, (max-width: 1024px) 50vw, 440px"
                   />
@@ -500,6 +501,7 @@ export default function HeroSection() {
               ref={leaf1Ref}
               className="absolute -top-4 -right-4 md:top-2 md:-right-8 lg:-right-12 z-[5] md:z-20"
               style={{ opacity: 0, willChange: 'transform' }}
+              aria-hidden="true"
             >
               <div ref={leaf1InnerRef} style={{ willChange: 'transform' }}>
                 <Image
@@ -521,6 +523,7 @@ export default function HeroSection() {
               ref={leaf2Ref}
               className="absolute -bottom-2 -left-6 md:-left-10 lg:-left-16 z-[5] md:z-20"
               style={{ opacity: 0, willChange: 'transform' }}
+              aria-hidden="true"
             >
               <div ref={leaf2InnerRef} style={{ willChange: 'transform' }}>
                 <Image
@@ -542,6 +545,7 @@ export default function HeroSection() {
               ref={leaf3Ref}
               className="absolute bottom-8 -right-2 md:bottom-12 md:-right-6 z-[3] rotate-45"
               style={{ opacity: 0, willChange: 'transform' }}
+              aria-hidden="true"
             >
               <div ref={leaf3InnerRef} style={{ willChange: 'transform' }}>
                 <Image
@@ -572,6 +576,7 @@ export default function HeroSection() {
         ref={scrollIndRef}
         className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-10"
         style={{ opacity: 0 }}
+        aria-hidden="true"
       >
         <span
           className="text-[10px] tracking-[0.25em] uppercase"
